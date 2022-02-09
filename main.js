@@ -18,9 +18,12 @@ async function github(username, callback) {
 }
 
 function main() {
-    github('katy4599', (error, projects) => {
-        for (let project of projects) {
-        console.log(`Project ${project.name} has ${project.stargazers_count} stars, and it is ${project.description}`);
+    github('katy4499', (error, projects) => {
+        if (error != undefined) {
+            console.log(error.message);
+            return;
+        }for (let project of projects) {
+            console.log(`Project ${project.name} has ${project.stargazers_count} stars, and it is ${project.description}`);
         }
     })
 }
