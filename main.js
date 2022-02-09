@@ -18,14 +18,25 @@ async function github(username, callback) {
 }
 
 function main() {
-    github('katy4499', (error, projects) => {
+    github('dylhack', (error, projects) => {
         if (error != undefined) {
             console.log(error.message);
             return;
-        }for (let project of projects) {
-            console.log(`Project ${project.name} has ${project.stargazers_count} stars, and it is ${project.description}`);
         }
-    })
+        const sorted = projects.sort((projectA, projectB) => {
+            if(projectA.stargazers_count > projectB.stargazers_count) { 
+                return -1; 
+            } else if(projectA.stargazers_count < projectB.stargazers_count) { 
+                return 1; 
+            } else {
+                return 0;
+            }
+        });
+
+        for (let project of sorted) {
+            console.log(`Project ${project.name} has ${project.stargazers_count} stars.`)
+        }
+    });
 }
 
 main();
